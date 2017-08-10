@@ -13,7 +13,8 @@ export default class Ace extends Component {
     constructor(){
         super();
         this.state={
-            aceEditorValue:''
+            aceEditorValue:'function test(num) {\n    return num++;\n}\ntest(8);',
+            resultPane:'blob'
         };
         this.onChange=this.onChange.bind(this);
         this.onClick=this.onClick.bind(this);
@@ -35,7 +36,11 @@ export default class Ace extends Component {
     }
 
     onClick(){
-        console.log('test',eval(this.state.aceEditorValue));
+        console.log('result',eval(this.state.aceEditorValue));
+        var results=JSON.stringify(eval(this.state.aceEditorValue));
+        this.setState({
+            resultPane: results
+        });
     }
 
 
@@ -53,7 +58,7 @@ export default class Ace extends Component {
                 name="CodePane"
                 editorProps={{$blockScrolling: true}}
                 value={`function test(num) {
-    return num++;
+return num++;
 }
 test(8);`}
             />
@@ -63,7 +68,9 @@ test(8);`}
                 onChange={this.onChange}
                 name="ResultPane"
                 editorProps={{$blockScrolling: true}}
+                value={this.state.resultPane}
             />
+
             <button onClick={this.onClick}>Run</button>
             </div>
         )
