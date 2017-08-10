@@ -37,9 +37,9 @@ export default class Ace extends Component {
 
     onClick(){
         console.log('result',eval(this.state.aceEditorValue));
-        var results=JSON.stringify(eval(this.state.aceEditorValue));
+        var results=eval(this.state.aceEditorValue);
         this.setState({
-            resultPane: results
+            resultPane: JSON.stringify(results)
         });
     }
 
@@ -51,25 +51,29 @@ export default class Ace extends Component {
             <div>
             <h1>HELLO</h1>
 
-            <AceEditor
-                mode="javascript"
-                theme="github"
-                onChange={this.onChange}
-                name="CodePane"
-                editorProps={{$blockScrolling: true}}
-                value={`function test(num) {
-return num++;
-}
-test(8);`}
-            />
-            <AceEditor
-                mode="javascript"
-                theme="github"
-                onChange={this.onChange}
-                name="ResultPane"
-                editorProps={{$blockScrolling: true}}
-                value={this.state.resultPane}
-            />
+
+                <div className="row">
+                    <div className="col-sm-6">
+                        <AceEditor
+                            mode="javascript"
+                            theme="github"
+                            onChange={this.onChange}
+                            name="CodePane"
+                            editorProps={{$blockScrolling: true}}
+                            value={this.state.aceEditorValue}
+                        />
+                    </div>
+                    <div className="col-sm-6">
+                        <AceEditor
+                            mode="javascript"
+                            theme="github"
+                            onChange={this.onChange}
+                            name="ResultPane"
+                            editorProps={{$blockScrolling: true}}
+                            value={this.state.resultPane}
+                        />
+                    </div>
+                </div>
 
             <button onClick={this.onClick}>Run</button>
             </div>
