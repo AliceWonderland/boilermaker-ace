@@ -4,7 +4,7 @@ import {Router} from 'react-router'
 import {Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
-import {Main, Login, Signup, UserHome,Ace} from './components'
+import {Main, Login, Signup, UserHome,Ace,HelloEmbed} from './components'
 import {me} from './store'
 
 /**
@@ -35,7 +35,8 @@ class Routes extends Component {
             }
             {/* Displays our Login component as a fallback */}
             {/*<Route component={Login} />*/}
-            <Route component={Ace} />
+            {/*<Route component={Ace} />*/}
+            <Route component={HelloEmbed} />
           </Switch>
         </Main>
       </Router>
